@@ -224,7 +224,7 @@ export default function App() {
     const [selected, setSelected] = useState(null);
 
     useEffect(() => {
-        fetch("/deckdata.json")
+        fetch(import.meta.env.BASE_URL + 'deckdata.json')
             .then((r) => r.json())
             .then(setDecks);
     }, []);
