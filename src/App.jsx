@@ -55,10 +55,10 @@ function HeroImages({ heroes }) {
                 >
                     <CardMedia
                         component="img"
-                        image={`/heroes/${grade}/${name}.png`}
+                        image={`${import.meta.env.BASE_URL}heroes/${grade}/${name}.png`}
                         alt={name}
                         sx={{ width: 52, height: 66, objectFit: 'cover', borderRadius: 1.5, filter: 'drop-shadow(0 2px 6px #0008)' }}
-                        onError={e => { e.target.onerror=null; e.target.src='/heroes/placeholder.png'; }}
+                        onError={e => { e.target.onerror=null; e.target.src=`${import.meta.env.BASE_URL}heroes/placeholder.png`; }}
                     />
                 </Card>
             ))}
