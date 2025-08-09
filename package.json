@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npx vite build",
     "generate:herolist": "node scripts/generateHeroList.js",
     "build:pages": "npm run generate:herolist && vite build && xcopy /E /I /Y dist docs",
     "preview": "vite preview"
