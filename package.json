@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:pages": "vite build && xcopy /E /I /Y dist docs",
+    "generate:herolist": "node scripts/generateHeroList.js",
+    "build:pages": "npm run generate:herolist && vite build && xcopy /E /I /Y dist docs",
     "preview": "vite preview"
   },
   "dependencies": {
