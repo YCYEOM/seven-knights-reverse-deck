@@ -23,10 +23,12 @@ npm run dev
 node scripts/generateHeroList.js
 
 ## 배포 전 작업
+```sh
 xcopy /E /I dist docs
 git add docs
 git commit -m "Deploy: copy dist to docs for GitHub Pages"
 git push
+```
 ---
 
 > 최초 버전: 2025.08
