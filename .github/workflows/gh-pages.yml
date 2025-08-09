@@ -39,7 +39,7 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Generate heroList.json
         run: node scripts/generateHeroList.js

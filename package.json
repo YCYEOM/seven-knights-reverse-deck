@@ -13,7 +13,10 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.5.0",
-    "react-perfect-scrollbar": "^1.5.8"
+    "react-perfect-scrollbar": "^1.5.8",
+    "@mui/material": "^5.18.0",
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.0.0",
