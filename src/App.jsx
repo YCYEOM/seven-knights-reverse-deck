@@ -5,6 +5,7 @@ import GuildWarTab from './tabs/GuildWarTab';
 import GrowthDungeonTab from './tabs/GrowthDungeonTab';
 import RaidTab from './tabs/RaidTab';
 import SiegeTab from './tabs/SiegeTab';
+import AllOutWarTab from './tabs/AllOutWarTab';
 
 const lolchessTheme = createTheme({
     palette: {
@@ -44,6 +45,7 @@ export default function App() {
                         <Tab label="성장던전" sx={{ fontWeight: 900, fontSize: 18, minWidth: 120 }} />
                         <Tab label="레이드" sx={{ fontWeight: 900, fontSize: 18, minWidth: 120 }} />
                         <Tab label="공성전" sx={{ fontWeight: 900, fontSize: 18, minWidth: 120 }} />
+                        <Tab label="총력전" sx={{ fontWeight: 900, fontSize: 18, minWidth: 120 }} />
                     </Tabs>
                 </Toolbar>
             </AppBar>
@@ -51,6 +53,7 @@ export default function App() {
             {tab === 1 && <GrowthDungeonTab />}
             {tab === 2 && <RaidTab />}
             {tab === 3 && <SiegeTab />}
+            {tab === 4 && <AllOutWarTab />}
         </ThemeProvider>
     );
 }

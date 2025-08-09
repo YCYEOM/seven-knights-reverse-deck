@@ -75,11 +75,7 @@
     "heroes": [
       {"name": "제이브", "grade": "legendary"},
       {"name": "루디", "grade": "legendary"},
-      {"name": "엘리스", "grade": "legendary"},
-      {"name": "에반", "grade": "rare"},
-      {"name": "유이", "grade": "rare"},
-      {"name": "녹스", "grade": "legendary"},
-      {"name": "크리스", "grade": "legendary"}
+      {"name": "엘리스", "grade": "legendary"}
     ],
     "counters": [
       { "enemy": "힐러 포함 즉사 방덱 사용 (ex: 에반 유이 녹스 / 유이 크리스 녹스)", "recommend": "제이브에 즉사 묻을 수도 있어서 디벞 해제 채용 고려 가능" }
@@ -93,16 +89,11 @@
     "heroes": [
       {"name": "제이브", "grade": "legendary"},
       {"name": "카르마", "grade": "legendary"},
-      {"name": "루디", "grade": "legendary"},
-      {"name": "노호", "grade": "rare"},
-      {"name": "풍연", "grade": "rare"},
-      {"name": "타카", "grade": "legendary"},
-      {"name": "루리", "grade": "legendary"},
-      {"name": "크리스", "grade": "legendary"},
-      {"name": "녹스", "grade": "legendary"},
-      {"name": "리", "grade": "rare"}
+      {"name": "루디", "grade": "legendary"}
     ],
     "counters": [
+      { "enemy": "노호, 디벞 면역영웅, 딜러(풍연 타카 루리 등)", "recommend": "" },
+      { "enemy": "리, 디벞 면역영웅, 딜러(풍연 타카 루리 등)", "recommend": "" },
       { "enemy": "크리스, 녹스, 힐러", "recommend": "" }
     ]
   },
@@ -113,8 +104,7 @@
     "condition": "",
     "heroes": [
       {"name": "크리스", "grade": "legendary"},
-      {"name": "녹스", "grade": "legendary"},
-      {"name": "레오", "grade": "rare"}
+      {"name": "녹스", "grade": "legendary"}
     ],
     "counters": [
       { "enemy": "레오 크리스 녹스", "recommend": "" },

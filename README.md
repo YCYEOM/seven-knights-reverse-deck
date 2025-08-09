@@ -15,9 +15,18 @@
 ## 개발
 ```sh
 npm install
+npm run build   
 npm run dev
 ```
 
+## 새로운 영웅 이미지 넣었을때
+node scripts/generateHeroList.js
+
+## 배포 전 작업
+xcopy /E /I dist docs
+git add docs
+git commit -m "Deploy: copy dist to docs for GitHub Pages"
+git push
 ---
 
 > 최초 버전: 2025.08
