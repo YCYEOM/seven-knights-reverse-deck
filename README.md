@@ -15,7 +15,7 @@
 ## 개발
 ```sh
 npm install
-npm run build   
+npm run build
 npm run dev
 ```
 
