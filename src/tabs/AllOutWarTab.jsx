@@ -48,7 +48,7 @@ const allOutWarData = [
     ],
   },
   {
-    title: '방덱1',
+    title: '방덱1 (카르마6초 핵심)',
     추천: [ { name: '카르마' }, { name: '루디' }, { name: '엘리스' }, { name: '제이브' } ],
     택1: [ [ { name: '헬레니아' }, { name: '로지' } ] ],
     스킬추천: [
