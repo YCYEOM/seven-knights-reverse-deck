@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { AppBar, Toolbar, CssBaseline, Tabs, Tab, Box, FormControl, Select, MenuItem, InputLabel } from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import { AppBar, Toolbar, CssBaseline, Tabs, Tab, Box } from '@mui/material';
 import GuildWarTab from './tabs/GuildWarTab.jsx';
 import GrowthDungeonTab from './tabs/GrowthDungeonTab.jsx';
 import RaidTab from './tabs/RaidTab.jsx';
@@ -45,7 +44,6 @@ export default function App() {
     const currentSub = subTab[groupKey] || 0;
     const handleTopChange = (e, v) => setTopTab(v);
     const handleSubChange = (e, v) => setSubTab(prev => ({ ...prev, [groupKey]: v }));
-    const isXs = useMediaQuery('(max-width:600px)');
     return (
         <ThemeProvider theme={lolchessTheme}>
             <CssBaseline />
@@ -70,92 +68,63 @@ export default function App() {
                 </Toolbar>
                 {/* 하위 소분류 탭 */}
                 <Toolbar sx={{ justifyContent: { xs: 'flex-start', md: 'center' }, px: { xs: 1, sm: 2 }, minHeight: { xs: 44, sm: 56 }, borderTop: '1px solid #23243a', overflowX: 'auto' }}>
-                    {isXs ? (
-                        <FormControl size="small" sx={{ minWidth: 140 }}>
-                            <InputLabel id="subtab-label">{groupKey === 'guild' ? '길드' : groupKey === 'farming' ? '파밍' : groupKey === 'pvp' ? 'PVP' : '장비'}</InputLabel>
-                            <Select
-                                labelId="subtab-label"
-                                label={groupKey === 'guild' ? '길드' : groupKey === 'farming' ? '파밍' : groupKey === 'pvp' ? 'PVP' : '장비'}
-                                value={currentSub}
-                                onChange={(e) => handleSubChange(e, e.target.value)}
-                            >
-                                {groupKey === 'guild' && [
-                                    <MenuItem key={0} value={0}>길드전</MenuItem>,
-                                    <MenuItem key={1} value={1}>공성전</MenuItem>,
-                                ]}
-                                {groupKey === 'farming' && [
-                                    <MenuItem key={0} value={0}>성장던전</MenuItem>,
-                                    <MenuItem key={1} value={1}>레이드</MenuItem>,
-                                ]}
-                                {groupKey === 'pvp' && [
-                                    <MenuItem key={0} value={0}>총력전</MenuItem>,
-                                ]}
-                                {groupKey === 'equip' && [
-                                    <MenuItem key={0} value={0}>장비추천</MenuItem>,
-                                ]}
-                            </Select>
-                        </FormControl>
-                    ) : (
-                        <>
-                            {groupKey === 'guild' && (
-                                <Tabs
-                                    value={currentSub}
-                                    onChange={handleSubChange}
-                                    textColor="secondary"
-                                    indicatorColor="secondary"
-                                    variant="scrollable"
-                                    scrollButtons="auto"
-                                    allowScrollButtonsMobile
-                                    sx={{ minHeight: 36, '& .MuiTabs-flexContainer': { flexWrap: 'nowrap' }, maxWidth: '100%' }}
-                                >
-                                    <Tab label="길드전" sx={{ fontWeight: 800, fontSize: { xs: 12, sm: 16 }, minWidth: { xs: 64, sm: 120 }, p: { xs: 0.25, sm: 0.75 } }} />
-                                    <Tab label="공성전" sx={{ fontWeight: 800, fontSize: { xs: 12, sm: 16 }, minWidth: { xs: 64, sm: 120 }, p: { xs: 0.25, sm: 0.75 } }} />
-                                </Tabs>
-                            )}
-                            {groupKey === 'farming' && (
-                                <Tabs
-                                    value={currentSub}
-                                    onChange={handleSubChange}
-                                    textColor="secondary"
-                                    indicatorColor="secondary"
-                                    variant="scrollable"
-                                    scrollButtons="auto"
-                                    allowScrollButtonsMobile
-                                    sx={{ minHeight: 36, '& .MuiTabs-flexContainer': { flexWrap: 'nowrap' }, maxWidth: '100%' }}
-                                >
-                                    <Tab label="성장던전" sx={{ fontWeight: 800, fontSize: { xs: 12, sm: 16 }, minWidth: { xs: 64, sm: 120 }, p: { xs: 0.25, sm: 0.75 } }} />
-                                    <Tab label="레이드" sx={{ fontWeight: 800, fontSize: { xs: 12, sm: 16 }, minWidth: { xs: 64, sm: 120 }, p: { xs: 0.25, sm: 0.75 } }} />
-                                </Tabs>
-                            )}
-                            {groupKey === 'pvp' && (
-                                <Tabs
-                                    value={currentSub}
-                                    onChange={handleSubChange}
-                                    textColor="secondary"
-                                    indicatorColor="secondary"
-                                    variant="scrollable"
-                                    scrollButtons="auto"
-                                    allowScrollButtonsMobile
-                                    sx={{ minHeight: 36, '& .MuiTabs-flexContainer': { flexWrap: 'nowrap' }, maxWidth: '100%' }}
-                                >
-                                    <Tab label="총력전" sx={{ fontWeight: 800, fontSize: { xs: 12, sm: 16 }, minWidth: { xs: 64, sm: 120 }, p: { xs: 0.25, sm: 0.75 } }} />
-                                </Tabs>
-                            )}
-                            {groupKey === 'equip' && (
-                                <Tabs
-                                    value={currentSub}
-                                    onChange={handleSubChange}
-                                    textColor="secondary"
-                                    indicatorColor="secondary"
-                                    variant="scrollable"
-                                    scrollButtons="auto"
-                                    allowScrollButtonsMobile
-                                    sx={{ minHeight: 36, '& .MuiTabs-flexContainer': { flexWrap: 'nowrap' }, maxWidth: '100%' }}
-                                >
-                                    <Tab label="장비추천" sx={{ fontWeight: 800, fontSize: { xs: 12, sm: 16 }, minWidth: { xs: 64, sm: 120 }, p: { xs: 0.25, sm: 0.75 } }} />
-                                </Tabs>
-                            )}
-                        </>
+                    {groupKey === 'guild' && (
+                        <Tabs
+                            value={currentSub}
+                            onChange={handleSubChange}
+                            textColor="secondary"
+                            indicatorColor="secondary"
+                            variant="scrollable"
+                            scrollButtons="auto"
+                            allowScrollButtonsMobile
+                            sx={{ minHeight: 36, '& .MuiTabs-flexContainer': { flexWrap: 'nowrap' }, maxWidth: '100%' }}
+                        >
+                            <Tab label="길드전" sx={{ fontWeight: 800, fontSize: { xs: 12, sm: 16 }, minWidth: { xs: 60, sm: 100 }, p: { xs: 0.25, sm: 0.75 } }} />
+                            <Tab label="공성전" sx={{ fontWeight: 800, fontSize: { xs: 12, sm: 16 }, minWidth: { xs: 60, sm: 100 }, p: { xs: 0.25, sm: 0.75 } }} />
+                        </Tabs>
+                    )}
+                    {groupKey === 'farming' && (
+                        <Tabs
+                            value={currentSub}
+                            onChange={handleSubChange}
+                            textColor="secondary"
+                            indicatorColor="secondary"
+                            variant="scrollable"
+                            scrollButtons="auto"
+                            allowScrollButtonsMobile
+                            sx={{ minHeight: 36, '& .MuiTabs-flexContainer': { flexWrap: 'nowrap' }, maxWidth: '100%' }}
+                        >
+                            <Tab label="성장던전" sx={{ fontWeight: 800, fontSize: { xs: 12, sm: 16 }, minWidth: { xs: 60, sm: 100 }, p: { xs: 0.25, sm: 0.75 } }} />
+                            <Tab label="레이드" sx={{ fontWeight: 800, fontSize: { xs: 12, sm: 16 }, minWidth: { xs: 60, sm: 100 }, p: { xs: 0.25, sm: 0.75 } }} />
+                        </Tabs>
+                    )}
+                    {groupKey === 'pvp' && (
+                        <Tabs
+                            value={currentSub}
+                            onChange={handleSubChange}
+                            textColor="secondary"
+                            indicatorColor="secondary"
+                            variant="scrollable"
+                            scrollButtons="auto"
+                            allowScrollButtonsMobile
+                            sx={{ minHeight: 36, '& .MuiTabs-flexContainer': { flexWrap: 'nowrap' }, maxWidth: '100%' }}
+                        >
+                            <Tab label="총력전" sx={{ fontWeight: 800, fontSize: { xs: 12, sm: 16 }, minWidth: { xs: 60, sm: 100 }, p: { xs: 0.25, sm: 0.75 } }} />
+                        </Tabs>
+                    )}
+                    {groupKey === 'equip' && (
+                        <Tabs
+                            value={currentSub}
+                            onChange={handleSubChange}
+                            textColor="secondary"
+                            indicatorColor="secondary"
+                            variant="scrollable"
+                            scrollButtons="auto"
+                            allowScrollButtonsMobile
+                            sx={{ minHeight: 36, '& .MuiTabs-flexContainer': { flexWrap: 'nowrap' }, maxWidth: '100%' }}
+                        >
+                            <Tab label="장비추천" sx={{ fontWeight: 800, fontSize: { xs: 12, sm: 16 }, minWidth: { xs: 60, sm: 100 }, p: { xs: 0.25, sm: 0.75 } }} />
+                        </Tabs>
                     )}
                 </Toolbar>
             </AppBar>

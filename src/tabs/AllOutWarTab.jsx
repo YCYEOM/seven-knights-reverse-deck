@@ -120,11 +120,11 @@ export default function AllOutWarTab() {
   useEffect(() => { fetchHeroList().then(setHeroList); }, []);
 
   return (
-    <Container maxWidth="md" sx={{ pt: 6, pb: 6 }}>
+    <Container maxWidth="md" sx={{ pt: { xs: 2, sm: 4 }, pb: { xs: 4, sm: 6 }, px: { xs: 1, sm: 2 } }}>
       <Typography variant="h4" align="center" fontWeight={900} color="secondary.light" gutterBottom sx={{ mb: 3 }}>
         총력전 덱 추천
       </Typography>
-      <Box>
+      <Box sx={{ width: '100%', overflowX: 'hidden' }}>
         {allOutWarData.map((section) => (
           <Paper key={section.title} elevation={4} sx={{ mb: 4, p: 3, borderRadius: 4, bgcolor: '#23243a', border: '2px solid #26283c' }}>
             <Typography variant="h6" fontWeight={800} color="primary.light" sx={{ mb: 2 }}>
@@ -151,19 +151,19 @@ export default function AllOutWarTab() {
               </>
             ) : null}
 
-            <Stack direction="row" spacing={4} alignItems="flex-start">
+            <Stack direction="row" spacing={4} alignItems="flex-start" sx={{ flexWrap: 'wrap', rowGap: 2, columnGap: 3 }}>
               {/* 좌측: 추천 */}
-              <Box>
+              <Box sx={{ flex: '1 1 260px', minWidth: 0 }}>
                 <Typography fontWeight={700} color="#FFD600" sx={{ mb: 1 }}>추천</Typography>
-                <Stack direction="row" spacing={1}>
+                <Stack direction="row" spacing={1} sx={{ flexWrap: 'wrap', rowGap: 1 }}>
                   {section.추천 && section.추천.length > 0 ? (
                     section.추천.map(hero => (
-                      <Card key={hero.name} elevation={2} sx={{ width: 56, height: 70, display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px solid #FFD600', bgcolor: '#181A20' }}>
+                      <Card key={hero.name} elevation={2} sx={{ width: { xs: 44, sm: 56 }, height: { xs: 56, sm: 70 }, display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px solid #FFD600', bgcolor: '#181A20' }}>
                         <CardMedia
                           component="img"
                           image={`${import.meta.env.BASE_URL}heroes/${getGradeFromList(hero.name, heroList)}/${fileSafe(hero.name)}.png`}
                           alt={hero.name}
-                          sx={{ width: 52, height: 66, objectFit: 'cover', borderRadius: 1.5 }}
+                          sx={{ width: { xs: 40, sm: 52 }, height: { xs: 52, sm: 66 }, objectFit: 'cover', borderRadius: 1.5 }}
                           onError={e => { e.target.onerror = null; e.target.src = `${import.meta.env.BASE_URL}heroes/placeholder.png`; }}
                         />
                       </Card>
@@ -175,16 +175,16 @@ export default function AllOutWarTab() {
                 {section.추천택1 && section.추천택1.length > 0 && (
                   <Box sx={{ mt: 1.5 }}>
                     <Typography variant="caption" color="#FFD600" sx={{ mb: 0.5, display: 'block' }}>추천 택1</Typography>
-                    <Stack direction="row" spacing={2}>
+                    <Stack direction="row" spacing={2} sx={{ flexWrap: 'wrap', rowGap: 1 }}>
                       {section.추천택1.map((group, idx) => (
                         <Stack key={idx} direction="row" spacing={1}>
                           {group.map(hero => (
-                            <Card key={hero.name} elevation={2} sx={{ width: 56, height: 70, display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px dashed #FFD600', bgcolor: '#181A20' }}>
+                            <Card key={hero.name} elevation={2} sx={{ width: { xs: 44, sm: 56 }, height: { xs: 56, sm: 70 }, display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px dashed #FFD600', bgcolor: '#181A20' }}>
                               <CardMedia
                                 component="img"
                                 image={`${import.meta.env.BASE_URL}heroes/${getGradeFromList(hero.name, heroList)}/${fileSafe(hero.name)}.png`}
                                 alt={hero.name}
-                                sx={{ width: 52, height: 66, objectFit: 'cover', borderRadius: 1.5 }}
+                                sx={{ width: { xs: 40, sm: 52 }, height: { xs: 52, sm: 66 }, objectFit: 'cover', borderRadius: 1.5 }}
                                 onError={e => { e.target.onerror = null; e.target.src = `${import.meta.env.BASE_URL}heroes/placeholder.png`; }}
                               />
                             </Card>
@@ -198,18 +198,18 @@ export default function AllOutWarTab() {
 
               {/* 우측: 택1 (여러 묶음 그룹을 가질 수 있음) */}
               {section.택1 && section.택1.length > 0 && (
-                <Box>
+                <Box sx={{ flex: '1 1 260px', minWidth: 0 }}>
                   <Typography fontWeight={700} color="primary.light" sx={{ mb: 1 }}>택1</Typography>
-                  <Stack direction="row" spacing={2}>
+                  <Stack direction="row" spacing={2} sx={{ flexWrap: 'wrap', rowGap: 1 }}>
                     {section.택1.map((group, idx) => (
                       <Stack key={idx} direction="row" spacing={1}>
                         {group.map(hero => (
-                          <Card key={hero.name} elevation={2} sx={{ width: 56, height: 70, display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px solid #3B82F6', bgcolor: '#181A20' }}>
+                          <Card key={hero.name} elevation={2} sx={{ width: { xs: 44, sm: 56 }, height: { xs: 56, sm: 70 }, display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px solid #3B82F6', bgcolor: '#181A20' }}>
                             <CardMedia
                               component="img"
                               image={`${import.meta.env.BASE_URL}heroes/${getGradeFromList(hero.name, heroList)}/${fileSafe(hero.name)}.png`}
                               alt={hero.name}
-                              sx={{ width: 52, height: 66, objectFit: 'cover', borderRadius: 1.5 }}
+                              sx={{ width: { xs: 40, sm: 52 }, height: { xs: 52, sm: 66 }, objectFit: 'cover', borderRadius: 1.5 }}
                               onError={e => { e.target.onerror = null; e.target.src = `${import.meta.env.BASE_URL}heroes/placeholder.png`; }}
                             />
                           </Card>
