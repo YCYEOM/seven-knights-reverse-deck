@@ -49,36 +49,81 @@ export default function App() {
             <CssBaseline />
             <AppBar position="static" elevation={0} sx={{ bgcolor: 'background.paper', borderBottom: '2px solid #23243a', mb: 4 }}>
                 {/* 상단 대분류 탭 */}
-                <Toolbar sx={{ justifyContent: 'center', minHeight: 64 }}>
-                    <Tabs value={topTab} onChange={handleTopChange} textColor="primary" indicatorColor="primary" sx={{ minHeight: 48 }}>
-                        <Tab label="길드" sx={{ fontWeight: 900, fontSize: 18, minWidth: 120 }} />
-                        <Tab label="파밍" sx={{ fontWeight: 900, fontSize: 18, minWidth: 120 }} />
-                        <Tab label="PVP" sx={{ fontWeight: 900, fontSize: 18, minWidth: 120 }} />
-                        <Tab label="장비" sx={{ fontWeight: 900, fontSize: 18, minWidth: 120 }} />
+                <Toolbar sx={{ justifyContent: 'center', minHeight: { xs: 56, sm: 64 }, overflowX: 'auto' }}>
+                    <Tabs
+                        value={topTab}
+                        onChange={handleTopChange}
+                        textColor="primary"
+                        indicatorColor="primary"
+                        variant="scrollable"
+                        scrollButtons="auto"
+                        allowScrollButtonsMobile
+                        sx={{ minHeight: 44, '& .MuiTabs-flexContainer': { flexWrap: 'nowrap' } }}
+                    >
+                        <Tab label="길드" sx={{ fontWeight: 900, fontSize: { xs: 14, sm: 18 }, minWidth: { xs: 72, sm: 120 }, p: { xs: 0.5, sm: 1 } }} />
+                        <Tab label="파밍" sx={{ fontWeight: 900, fontSize: { xs: 14, sm: 18 }, minWidth: { xs: 72, sm: 120 }, p: { xs: 0.5, sm: 1 } }} />
+                        <Tab label="PVP" sx={{ fontWeight: 900, fontSize: { xs: 14, sm: 18 }, minWidth: { xs: 72, sm: 120 }, p: { xs: 0.5, sm: 1 } }} />
+                        <Tab label="장비" sx={{ fontWeight: 900, fontSize: { xs: 14, sm: 18 }, minWidth: { xs: 72, sm: 120 }, p: { xs: 0.5, sm: 1 } }} />
                     </Tabs>
                 </Toolbar>
                 {/* 하위 소분류 탭 */}
-                <Toolbar sx={{ justifyContent: 'center', minHeight: 56, borderTop: '1px solid #23243a' }}>
+                <Toolbar sx={{ justifyContent: 'center', minHeight: { xs: 48, sm: 56 }, borderTop: '1px solid #23243a', overflowX: 'auto' }}>
                     {groupKey === 'guild' && (
-                        <Tabs value={currentSub} onChange={handleSubChange} textColor="secondary" indicatorColor="secondary" sx={{ minHeight: 44 }}>
-                            <Tab label="길드전" sx={{ fontWeight: 800, fontSize: 16, minWidth: 120 }} />
-                            <Tab label="공성전" sx={{ fontWeight: 800, fontSize: 16, minWidth: 120 }} />
+                        <Tabs
+                            value={currentSub}
+                            onChange={handleSubChange}
+                            textColor="secondary"
+                            indicatorColor="secondary"
+                            variant="scrollable"
+                            scrollButtons="auto"
+                            allowScrollButtonsMobile
+                            sx={{ minHeight: 40, '& .MuiTabs-flexContainer': { flexWrap: 'nowrap' } }}
+                        >
+                            <Tab label="길드전" sx={{ fontWeight: 800, fontSize: { xs: 13, sm: 16 }, minWidth: { xs: 68, sm: 120 }, p: { xs: 0.25, sm: 0.75 } }} />
+                            <Tab label="공성전" sx={{ fontWeight: 800, fontSize: { xs: 13, sm: 16 }, minWidth: { xs: 68, sm: 120 }, p: { xs: 0.25, sm: 0.75 } }} />
                         </Tabs>
                     )}
                     {groupKey === 'farming' && (
-                        <Tabs value={currentSub} onChange={handleSubChange} textColor="secondary" indicatorColor="secondary" sx={{ minHeight: 44 }}>
-                            <Tab label="성장던전" sx={{ fontWeight: 800, fontSize: 16, minWidth: 120 }} />
-                            <Tab label="레이드" sx={{ fontWeight: 800, fontSize: 16, minWidth: 120 }} />
+                        <Tabs
+                            value={currentSub}
+                            onChange={handleSubChange}
+                            textColor="secondary"
+                            indicatorColor="secondary"
+                            variant="scrollable"
+                            scrollButtons="auto"
+                            allowScrollButtonsMobile
+                            sx={{ minHeight: 40, '& .MuiTabs-flexContainer': { flexWrap: 'nowrap' } }}
+                        >
+                            <Tab label="성장던전" sx={{ fontWeight: 800, fontSize: { xs: 13, sm: 16 }, minWidth: { xs: 68, sm: 120 }, p: { xs: 0.25, sm: 0.75 } }} />
+                            <Tab label="레이드" sx={{ fontWeight: 800, fontSize: { xs: 13, sm: 16 }, minWidth: { xs: 68, sm: 120 }, p: { xs: 0.25, sm: 0.75 } }} />
                         </Tabs>
                     )}
                     {groupKey === 'pvp' && (
-                        <Tabs value={currentSub} onChange={handleSubChange} textColor="secondary" indicatorColor="secondary" sx={{ minHeight: 44 }}>
-                            <Tab label="총력전" sx={{ fontWeight: 800, fontSize: 16, minWidth: 120 }} />
+                        <Tabs
+                            value={currentSub}
+                            onChange={handleSubChange}
+                            textColor="secondary"
+                            indicatorColor="secondary"
+                            variant="scrollable"
+                            scrollButtons="auto"
+                            allowScrollButtonsMobile
+                            sx={{ minHeight: 40, '& .MuiTabs-flexContainer': { flexWrap: 'nowrap' } }}
+                        >
+                            <Tab label="총력전" sx={{ fontWeight: 800, fontSize: { xs: 13, sm: 16 }, minWidth: { xs: 68, sm: 120 }, p: { xs: 0.25, sm: 0.75 } }} />
                         </Tabs>
                     )}
                     {groupKey === 'equip' && (
-                        <Tabs value={currentSub} onChange={handleSubChange} textColor="secondary" indicatorColor="secondary" sx={{ minHeight: 44 }}>
-                            <Tab label="장비추천" sx={{ fontWeight: 800, fontSize: 16, minWidth: 120 }} />
+                        <Tabs
+                            value={currentSub}
+                            onChange={handleSubChange}
+                            textColor="secondary"
+                            indicatorColor="secondary"
+                            variant="scrollable"
+                            scrollButtons="auto"
+                            allowScrollButtonsMobile
+                            sx={{ minHeight: 40, '& .MuiTabs-flexContainer': { flexWrap: 'nowrap' } }}
+                        >
+                            <Tab label="장비추천" sx={{ fontWeight: 800, fontSize: { xs: 13, sm: 16 }, minWidth: { xs: 68, sm: 120 }, p: { xs: 0.25, sm: 0.75 } }} />
                         </Tabs>
                     )}
                 </Toolbar>
