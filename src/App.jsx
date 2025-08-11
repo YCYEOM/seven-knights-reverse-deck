@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { AppBar, Toolbar, CssBaseline, Tabs, Tab } from '@mui/material';
+import { AppBar, Toolbar, CssBaseline, Tabs, Tab, Box } from '@mui/material';
 import GuildWarTab from './tabs/GuildWarTab';
 import GrowthDungeonTab from './tabs/GrowthDungeonTab';
 import RaidTab from './tabs/RaidTab';
 import SiegeTab from './tabs/SiegeTab';
 import AllOutWarTab from './tabs/AllOutWarTab';
+import EquipmentTab from './tabs/EquipmentTab';
 
 const lolchessTheme = createTheme({
     palette: {
@@ -34,26 +35,70 @@ const lolchessTheme = createTheme({
  
 
 export default function App() {
-    const [tab, setTab] = useState(0);
+    // 상단 대분류 탭: 0=길드, 1=파밍, 2=PVP, 3=장비
+    const [topTab, setTopTab] = useState(0);
+    // 하위 소분류 탭 상태를 대분류별로 보관
+    const [subTab, setSubTab] = useState({ guild: 0, farming: 0, pvp: 0, equip: 0 });
+
+    const groupKey = topTab === 0 ? 'guild' : topTab === 1 ? 'farming' : topTab === 2 ? 'pvp' : 'equip';
+    const currentSub = subTab[groupKey] || 0;
+    const handleTopChange = (e, v) => setTopTab(v);
+    const handleSubChange = (e, v) => setSubTab(prev => ({ ...prev, [groupKey]: v }));
     return (
         <ThemeProvider theme={lolchessTheme}>
             <CssBaseline />
             <AppBar position="static" elevation={0} sx={{ bgcolor: 'background.paper', borderBottom: '2px solid #23243a', mb: 4 }}>
+                {/* 상단 대분류 탭 */}
                 <Toolbar sx={{ justifyContent: 'center', minHeight: 64 }}>
-                    <Tabs value={tab} onChange={(e, v) => setTab(v)} textColor="primary" indicatorColor="primary" sx={{ minHeight: 48 }}>
-                        <Tab label="길드전" sx={{ fontWeight: 900, fontSize: 18, minWidth: 120 }} />
-                        <Tab label="성장던전" sx={{ fontWeight: 900, fontSize: 18, minWidth: 120 }} />
-                        <Tab label="레이드" sx={{ fontWeight: 900, fontSize: 18, minWidth: 120 }} />
-                        <Tab label="공성전" sx={{ fontWeight: 900, fontSize: 18, minWidth: 120 }} />
-                        <Tab label="총력전" sx={{ fontWeight: 900, fontSize: 18, minWidth: 120 }} />
+                    <Tabs value={topTab} onChange={handleTopChange} textColor="primary" indicatorColor="primary" sx={{ minHeight: 48 }}>
+                        <Tab label="길드" sx={{ fontWeight: 900, fontSize: 18, minWidth: 120 }} />
+                        <Tab label="파밍" sx={{ fontWeight: 900, fontSize: 18, minWidth: 120 }} />
+                        <Tab label="PVP" sx={{ fontWeight: 900, fontSize: 18, minWidth: 120 }} />
+                        <Tab label="장비" sx={{ fontWeight: 900, fontSize: 18, minWidth: 120 }} />
                     </Tabs>
                 </Toolbar>
+                {/* 하위 소분류 탭 */}
+                <Toolbar sx={{ justifyContent: 'center', minHeight: 56, borderTop: '1px solid #23243a' }}>
+                    {groupKey === 'guild' && (
+                        <Tabs value={currentSub} onChange={handleSubChange} textColor="secondary" indicatorColor="secondary" sx={{ minHeight: 44 }}>
+                            <Tab label="길드전" sx={{ fontWeight: 800, fontSize: 16, minWidth: 120 }} />
+                            <Tab label="공성전" sx={{ fontWeight: 800, fontSize: 16, minWidth: 120 }} />
+                        </Tabs>
+                    )}
+                    {groupKey === 'farming' && (
+                        <Tabs value={currentSub} onChange={handleSubChange} textColor="secondary" indicatorColor="secondary" sx={{ minHeight: 44 }}>
+                            <Tab label="성장던전" sx={{ fontWeight: 800, fontSize: 16, minWidth: 120 }} />
+                            <Tab label="레이드" sx={{ fontWeight: 800, fontSize: 16, minWidth: 120 }} />
+                        </Tabs>
+                    )}
+                    {groupKey === 'pvp' && (
+                        <Tabs value={currentSub} onChange={handleSubChange} textColor="secondary" indicatorColor="secondary" sx={{ minHeight: 44 }}>
+                            <Tab label="총력전" sx={{ fontWeight: 800, fontSize: 16, minWidth: 120 }} />
+                        </Tabs>
+                    )}
+                    {groupKey === 'equip' && (
+                        <Tabs value={currentSub} onChange={handleSubChange} textColor="secondary" indicatorColor="secondary" sx={{ minHeight: 44 }}>
+                            <Tab label="장비추천" sx={{ fontWeight: 800, fontSize: 16, minWidth: 120 }} />
+                        </Tabs>
+                    )}
+                </Toolbar>
             </AppBar>
-            {tab === 0 && <GuildWarTab />}
-            {tab === 1 && <GrowthDungeonTab />}
-            {tab === 2 && <RaidTab />}
-            {tab === 3 && <SiegeTab />}
-            {tab === 4 && <AllOutWarTab />}
+
+            {/* 컨텐츠 렌더링 */}
+            <Box sx={{ px: 2 }}>
+                {groupKey === 'guild' && (
+                    currentSub === 0 ? <GuildWarTab /> : <SiegeTab />
+                )}
+                {groupKey === 'farming' && (
+                    currentSub === 0 ? <GrowthDungeonTab /> : <RaidTab />
+                )}
+                {groupKey === 'pvp' && (
+                    <AllOutWarTab />
+                )}
+                {groupKey === 'equip' && (
+                    <EquipmentTab />
+                )}
+            </Box>
         </ThemeProvider>
     );
 }

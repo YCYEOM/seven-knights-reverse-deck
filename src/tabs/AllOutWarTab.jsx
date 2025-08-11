@@ -19,6 +19,13 @@ const allOutWarData = [
       '추천1 파이1스 > 콜트1스 > 콜트2스',
       '추천2 파이1스 > 태오2스 > 콜트2스 (방덱저격)'
     ],
+    장비셋팅: [
+      '파이 <조율자> | 무기 생/방 | 방어 막/받/효저',
+      '태오 <조율자> | 무기 치확/치확 | 방어 막/받/효저',
+      '델론즈 <조율자> | 무기 생/방 | 방어 막/받/효저',
+      '아일린 <수문장> | 무기 생 | 방어 막/받/효저',
+      '콜트 <주술사> | 무기 공/방어 공 [공덱상대], <복수자> | 무기 효공/방어 공 [방덱상대]',
+    ],
   },
   {
     title: '태오공덱',
@@ -36,6 +43,14 @@ const allOutWarData = [
       '추천1 린2스 > 멜키르2스 > 연희2스 (방덱저격)',
       '추천2 린2스 > 멜키르1스 > 연희2스',
       '추천3 린2스 > 쥬리2스 > 연희2스'
+    ],
+    장비셋팅: [
+      '멜키르 <조율자> | 무기 생/방 | 방어 막/받/효저',
+      '바네사 <조율자> | 무기 치확/치확 | 방어 막/받/효저',
+      '린 <조율자> | 무기 생/방 | 방어 막/받/효저',
+      '연희 <수문장> | 무기 생 | 방어 막/받/효저',
+      '유신 <주술사> | 무기 공/방어 공 [공덱상대], <복수자> | 무기 효공/방어 공 [방덱상대]',
+      '쥬리 <주술사> | 무기 공/방어 공 [공덱상대], <복수자> | 무기 효공/방어 공 [방덱상대]',
     ],
   },
   {
@@ -114,37 +129,22 @@ export default function AllOutWarTab() {
               {section.title}
             </Typography>
 
-            {/* 상단: 스킬 추천 및 장비 셋팅 */}
-            {(section.스킬추천 && section.스킬추천.length > 0) || (section.장비셋팅 && section.장비셋팅.length > 0) ? (
+            {/* 상단: 스킬 추천만 표시 (장비 셋팅은 별도 탭으로 이동) */}
+            {section.스킬추천 && section.스킬추천.length > 0 ? (
               <>
-                {section.스킬추천 && section.스킬추천.length > 0 && (
-                  <Box>
-                    <Typography fontWeight={700} color="#9CA3AF" sx={{ mb: 1 }}>스킬 순서</Typography>
-                    <Stack spacing={0.75} sx={{ mb: section.장비셋팅 && section.장비셋팅.length > 0 ? 1.5 : 0 }}>
-                      {section.스킬추천.map((line, idx) => (
-                        <Stack key={idx} direction="row" spacing={1} alignItems="center">
-                          <Box sx={{ width: 20, height: 20, borderRadius: '50%', bgcolor: '#3B82F6', color: '#FFFFFF', fontSize: 12, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            {idx + 1}
-                          </Box>
-                          <Typography color="#E5E7EB" variant="body2">{line}</Typography>
-                        </Stack>
-                      ))}
-                    </Stack>
-                  </Box>
-                )}
-                {section.장비셋팅 && section.장비셋팅.length > 0 && (
-                  <Box>
-                    <Typography fontWeight={700} color="#9CA3AF" sx={{ mb: 1 }}>장비 셋팅</Typography>
-                    <Stack spacing={1}>
-                      {section.장비셋팅.map((line, idx) => (
-                        <Box key={idx} sx={{ p: 1, px: 1.5, bgcolor: '#1B1D2A', border: '1px solid #2E3148', borderRadius: 1.5, display: 'flex', alignItems: 'center' }}>
-                          <Box sx={{ width: 6, alignSelf: 'stretch', bgcolor: '#10B981', borderRadius: 1, mr: 1.25 }} />
-                          <Typography color="#E5E7EB" variant="body2">{line}</Typography>
+                <Box>
+                  <Typography fontWeight={700} color="#9CA3AF" sx={{ mb: 1 }}>스킬 순서</Typography>
+                  <Stack spacing={0.75}>
+                    {section.스킬추천.map((line, idx) => (
+                      <Stack key={idx} direction="row" spacing={1} alignItems="center">
+                        <Box sx={{ width: 20, height: 20, borderRadius: '50%', bgcolor: '#3B82F6', color: '#FFFFFF', fontSize: 12, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          {idx + 1}
                         </Box>
-                      ))}
-                    </Stack>
-                  </Box>
-                )}
+                        <Typography color="#E5E7EB" variant="body2">{line}</Typography>
+                      </Stack>
+                    ))}
+                  </Stack>
+                </Box>
                 <Divider sx={{ my: 2, borderColor: '#2E3148' }} />
               </>
             ) : null}
