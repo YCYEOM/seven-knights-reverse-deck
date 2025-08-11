@@ -6,7 +6,15 @@ import { fetchHeroList, getGradeFromList } from "../heroList";
 // 월: 수호자의 성, 화: 포디나의 성, 수: 불멸의 성, 목: 죽음의 성, 금: 고대용의 성, 토: 혹한의 성, 일: 지옥의 성
 // 각 항목은 필수 영웅 배열과 택1 세부 그룹(딜러/힐러/토템)을 가집니다. 이름은 이미지 파일명과 동일해야 합니다.
 const siegeData = [
-  { day: '월', title: '수호자의 성',   필수: [ { name: '에반' }, { name: '아리엘' } ], 추천: [ { name: '루리' }, { name: '리나' }, { name: '에반' }, { name: '바네사' }, { name: '연희' } ], 택1: { 딜러: [ { name: '세라' }, { name: '루리' } ], 힐러: [ { name: '리나' }, { name: '유이' } ], 토템: [ { name: '노호' }, { name: '조커' }, { name: '소이' }, { name: '바네사', note: '2초월 이상' } ] } },
+  { day: '월', title: '수호자의 성',   필수: [ { name: '에반' }, { name: '아리엘' } ], 추천: [ { name: '루리' }, { name: '리나' }, { name: '에반' }, { name: '바네사' }, { name: '연희' } ], 택1: { 딜러: [ { name: '세라' }, { name: '루리' } ], 힐러: [ { name: '리나' }, { name: '유이' } ], 토템: [ { name: '노호' }, { name: '조커' }, { name: '소이' }, { name: '바네사', note: '2초월 이상' } ] },
+    skillOrder: [
+      '연희1 바네사2 리나2 바네사1 루리2',
+      '루리1 연희2 에반2 연희1 바네사1',
+      '바네사2 리나2 루리2 루리1 리나1',
+      '바네사1 연희1 바네사2 루리2 루리1',
+    ],
+    skillTip: '2라운드 바네사 원콤 안나면 스킬순서 4번 바네사2스킬 생략'
+  },
   { day: '화', title: '포디나의 성',   필수: [ { name: '클로에' }, { name: '세라' } ], 추천: [ { name: '루리' }, { name: '리나' }, { name: '클로에' }, { name: '바네사' }, { name: '연희' } ], 택1: { 딜러: [ { name: '아리엘' }, { name: '루리' } ], 힐러: [ { name: '리나' }, { name: '유이' } ], 토템: [ { name: '바네사' }, { name: '에이스' }, { name: '레이첼' } ] } },
   { day: '수', title: '불멸의 성',     필수: [ { name: '클로에' }, { name: '아리엘' } ], 추천: [ { name: '루리' }, { name: '리나' }, { name: '아리엘' }, { name: '바네사' }, { name: '연희' } ], 택1: { 딜러: [ { name: '세라' }, { name: '루리' } ], 힐러: [ { name: '리나' }, { name: '유이' } ], 토템: [ { name: '에이스' }, { name: '레이첼' } ] } },
   { day: '목', title: '죽음의 성',     필수: [ { name: '진' }, { name: '리' }, { name: '타카' } ], 추천: [ { name: '타카' }, { name: '리나' }, { name: '파이' }, { name: '레이첼' }, { name: '진' }, { name: '에이스' } ], 추천딜러: [ { name: '파이' }, { name: '레이첼' } ], 택1: { 토템2: [ { name: '리나' }, { name: '에이스' }, { name: '레이첼' } ] } },
@@ -130,6 +138,25 @@ export default function SiegeTab() {
                 })()}
               </Stack>
             </Stack>
+
+            {/* 스킬 순서 표시 (있을 경우) */}
+            {fort.skillOrder && fort.skillOrder.length > 0 && (
+              <Box sx={{ mt: 2 }}>
+                <Divider sx={{ borderColor: '#2f3046', mb: 1 }} />
+                <Typography variant="subtitle2" color="secondary.light" sx={{ mb: 1, fontWeight: 800 }}>스킬 순서</Typography>
+                <Stack spacing={0.5}>
+                  {fort.skillOrder.map((line, idx) => (
+                    <Typography key={idx} variant="body2" color="text.secondary">{idx + 1}. {line}</Typography>
+                  ))}
+                </Stack>
+              </Box>
+            )}
+
+            {fort.skillTip && (
+              <Box sx={{ mt: 1.5 }}>
+                <Typography variant="body2" color="text.secondary">팁: {fort.skillTip}</Typography>
+              </Box>
+            )}
           </Paper>
         ))}
       </Box>
