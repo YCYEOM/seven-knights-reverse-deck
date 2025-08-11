@@ -7,9 +7,39 @@ import { fetchHeroList, getGradeFromList } from "../heroList";
 
 // 데이터는 public/equipmentData.json에서 동적 로딩합니다.
 async function fetchEquipmentData() {
-  const res = await fetch(import.meta.env.BASE_URL + 'equipmentData.json');
-  if (!res.ok) throw new Error('equipmentData.json fetch 실패');
-  return await res.json();
+  // 배포 환경별로 정적 파일 루트가 다를 수 있어 다중 경로를 순차 시도합니다.
+  const base = import.meta.env.BASE_URL || '/';
+  const candidates = [
+    `${base}equipmentData.json`,
+    `${base}docs/equipmentData.json`,
+    `${base}data/equipmentData.json`,
+    // 일부 호스팅은 대소문자 구분으로 인해 다른 케이스 파일만 존재할 수 있음
+    `${base}equipmentdata.json`,
+    `${base}docs/equipmentdata.json`,
+  ];
+
+  const errors = [];
+  for (const url of candidates) {
+    try {
+      const res = await fetch(url, { cache: 'no-store' });
+      if (res.ok) {
+        return await res.json();
+      }
+      errors.push(`${url} -> ${res.status}`);
+    } catch (e) {
+      errors.push(`${url} -> ${e?.message || 'network error'}`);
+    }
+  }
+  // 마지막으로 상대경로(현재 위치 기준)도 시도
+  try {
+    const res = await fetch('equipmentData.json', { cache: 'no-store' });
+    if (res.ok) return await res.json();
+    errors.push(`./equipmentData.json -> ${res.status}`);
+  } catch (e) {
+    errors.push(`./equipmentData.json -> ${e?.message || 'network error'}`);
+  }
+  console.error('[EquipmentTab] equipmentData.json fetch 실패. 시도 경로:', errors);
+  throw new Error('equipmentData.json fetch 실패');
 }
 
 // 이름 정규화: 공백 제거 + 소문자
