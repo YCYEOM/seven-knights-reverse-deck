@@ -160,6 +160,9 @@ export default function App() {
                 </Toolbar>
             </AppBar>
 
+            {/* Sticky AppBar offset so content isn't hidden under it */}
+            <Box sx={{ height: { xs: 96, sm: 72, md: 8 } }} />
+
             {/* 컨텐츠 렌더링 */}
             <Box sx={{ px: { xs: 1, sm: 2 }, py: { xs: 1, sm: 2 }, maxWidth: 1280, mx: 'auto', width: '100%' }}>
                 {groupKey === 'guild' && (

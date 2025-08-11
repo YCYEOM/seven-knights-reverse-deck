@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Box, Card, CardMedia, Container, Paper, Stack, Typography, Divider } from "@mui/material";
 import { fetchHeroList, getGradeFromList } from "../heroList";
+// 파일명 정규화: 공백 제거 + 소문자
+const fileSafe = (s = '') => String(s).replace(/\s+/g, '').toLowerCase();
 
 // TODO: 총력전(보스/스테이지)별 조합 데이터를 아래 형식으로 추가하세요.
 // 예)
@@ -159,7 +161,7 @@ export default function AllOutWarTab() {
                       <Card key={hero.name} elevation={2} sx={{ width: 56, height: 70, display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px solid #FFD600', bgcolor: '#181A20' }}>
                         <CardMedia
                           component="img"
-                          image={`${import.meta.env.BASE_URL}heroes/${getGradeFromList(hero.name, heroList)}/${hero.name}.png`}
+                          image={`${import.meta.env.BASE_URL}heroes/${getGradeFromList(hero.name, heroList)}/${fileSafe(hero.name)}.png`}
                           alt={hero.name}
                           sx={{ width: 52, height: 66, objectFit: 'cover', borderRadius: 1.5 }}
                           onError={e => { e.target.onerror = null; e.target.src = `${import.meta.env.BASE_URL}heroes/placeholder.png`; }}
@@ -180,7 +182,7 @@ export default function AllOutWarTab() {
                             <Card key={hero.name} elevation={2} sx={{ width: 56, height: 70, display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px dashed #FFD600', bgcolor: '#181A20' }}>
                               <CardMedia
                                 component="img"
-                                image={`${import.meta.env.BASE_URL}heroes/${getGradeFromList(hero.name, heroList)}/${hero.name}.png`}
+                                image={`${import.meta.env.BASE_URL}heroes/${getGradeFromList(hero.name, heroList)}/${fileSafe(hero.name)}.png`}
                                 alt={hero.name}
                                 sx={{ width: 52, height: 66, objectFit: 'cover', borderRadius: 1.5 }}
                                 onError={e => { e.target.onerror = null; e.target.src = `${import.meta.env.BASE_URL}heroes/placeholder.png`; }}
@@ -205,7 +207,7 @@ export default function AllOutWarTab() {
                           <Card key={hero.name} elevation={2} sx={{ width: 56, height: 70, display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px solid #3B82F6', bgcolor: '#181A20' }}>
                             <CardMedia
                               component="img"
-                              image={`${import.meta.env.BASE_URL}heroes/${getGradeFromList(hero.name, heroList)}/${hero.name}.png`}
+                              image={`${import.meta.env.BASE_URL}heroes/${getGradeFromList(hero.name, heroList)}/${fileSafe(hero.name)}.png`}
                               alt={hero.name}
                               sx={{ width: 52, height: 66, objectFit: 'cover', borderRadius: 1.5 }}
                               onError={e => { e.target.onerror = null; e.target.src = `${import.meta.env.BASE_URL}heroes/placeholder.png`; }}
