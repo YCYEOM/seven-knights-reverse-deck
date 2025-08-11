@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AppBar, Toolbar, CssBaseline, Tabs, Tab, Box } from '@mui/material';
-import GuildWarTab from './tabs/GuildWarTab';
-import GrowthDungeonTab from './tabs/GrowthDungeonTab';
-import RaidTab from './tabs/RaidTab';
-import SiegeTab from './tabs/SiegeTab';
-import AllOutWarTab from './tabs/AllOutWarTab';
-import EquipmentTab from './tabs/EquipmentTab';
+import GuildWarTab from './tabs/GuildWarTab.jsx';
+import GrowthDungeonTab from './tabs/GrowthDungeonTab.jsx';
+import RaidTab from './tabs/RaidTab.jsx';
+import SiegeTab from './tabs/SiegeTab.jsx';
+import AllOutWarTab from './tabs/AllOutWarTab.jsx';
+import EquipmentTab from './tabs/EquipmentTab.jsx';
 
 const lolchessTheme = createTheme({
     palette: {
