@@ -320,14 +320,14 @@ export default function EquipmentTab() {
             const cat = (hero.category || '').trim();
             const rows = [];
             if (cat === '딜러') {
-              rows.push({ section: '서브옵션', baseLabel: '서브옵션', bodyRest: '치확 / 치피 / 공% / 공 / 약공', conds: [] });
+              rows.push({ section: '서브옵션', baseLabel: '서브옵션', bodyRest: '치확 / 치피 / 공격력 / 약공', conds: [] });
               rows.push({ section: '서브옵션', baseLabel: '서브옵션', bodyRest: '치피2+공%2', conds: ['치확 충분'] });
               rows.push({ section: '서브옵션', baseLabel: '서브옵션', bodyRest: '치확2+공%2', conds: ['치확 부족'] });
             } else if (cat === '토템') {
-              rows.push({ section: '서브옵션', baseLabel: '서브옵션', bodyRest: '막기% / 생% / 생 / 효과적중 / 방% / 방', conds: [] });
+              rows.push({ section: '서브옵션', baseLabel: '서브옵션', bodyRest: '막기 / 생명력 / 효과적중 / 방어력', conds: [] });
               rows.push({ section: '서브옵션', baseLabel: '서브옵션', bodyRest: '속공', conds: ['결장용'] });
             } else if (cat === '방덱') {
-              rows.push({ section: '서브옵션', baseLabel: '서브옵션', bodyRest: '막기% / 생% / 생 / 효과저항 / 방% / 방', conds: [] });
+              rows.push({ section: '서브옵션', baseLabel: '서브옵션', bodyRest: '막기 / 생명력 / 효과저항 / 방어력', conds: [] });
             }
             return rows;
           })();
