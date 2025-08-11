@@ -34,6 +34,8 @@ export default function RaidTab() {
     fetchHeroList().then(setHeroList);
   }, []);
 
+  const fileSafe = (s = '') => String(s).replace(/\s+/g, '').toLowerCase();
+
   return (
     <Container maxWidth="md" sx={{ pt: 6, pb: 6 }}>
       <Typography variant="h4" align="center" fontWeight={900} color="primary.light" gutterBottom sx={{ mb: 3 }}>
@@ -41,23 +43,23 @@ export default function RaidTab() {
       </Typography>
       <Box>
         {raidData.map((raid) => (
-          <Paper key={raid.title} elevation={4} sx={{ mb: 4, p: 3, borderRadius: 4, bgcolor: '#23243a', border: '2px solid #26283c' }}>
+          <Paper key={raid.title} elevation={4} sx={{ mb: 4, p: { xs: 2, sm: 3 }, borderRadius: 4, bgcolor: '#23243a', border: '2px solid #26283c', overflow: 'hidden' }}>
             <Typography variant="h6" fontWeight={800} color="primary.light" sx={{ mb: 2 }}>
               {raid.title}
             </Typography>
-            <Stack direction="row" spacing={4} alignItems="flex-start">
+            <Stack direction="row" alignItems="flex-start" sx={{ flexWrap: 'wrap', columnGap: { xs: 2, sm: 4 }, rowGap: { xs: 2, sm: 2.5 } }}>
               {/* 좌측: 필수 */}
               <Box>
                 <Typography fontWeight={700} color="secondary.light" sx={{ mb: 1 }}>필수</Typography>
-                <Stack direction="row" spacing={1}>
+                <Stack direction="row" spacing={1} sx={{ flexWrap: 'wrap', rowGap: 1, columnGap: 1 }}>
                   {raid.필수 && raid.필수.length > 0 ? (
                     raid.필수.map(hero => (
-                      <Card key={hero.name} elevation={2} sx={{ width: 56, height: 70, display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px solid #A78BFA', bgcolor: '#181A20' }}>
+                      <Card key={hero.name} elevation={2} sx={{ width: { xs: 48, sm: 56 }, height: { xs: 60, sm: 70 }, display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px solid #A78BFA', bgcolor: '#181A20' }}>
                         <CardMedia
                           component="img"
-                          image={`${import.meta.env.BASE_URL}heroes/${getGradeFromList(hero.name, heroList)}/${hero.name}.png`}
+                          image={`${import.meta.env.BASE_URL}heroes/${getGradeFromList(hero.name, heroList)}/${fileSafe(hero.name)}.png`}
                           alt={hero.name}
-                          sx={{ width: 52, height: 66, objectFit: 'cover', borderRadius: 1.5 }}
+                          sx={{ width: { xs: 44, sm: 52 }, height: { xs: 56, sm: 66 }, objectFit: 'cover', borderRadius: 1.5 }}
                           onError={e => { e.target.onerror = null; e.target.src = `${import.meta.env.BASE_URL}heroes/placeholder.png`; }}
                         />
                       </Card>
@@ -71,15 +73,15 @@ export default function RaidTab() {
               {/* 가운데: 추천 */}
               <Box>
                 <Typography fontWeight={700} color="#FFD600" sx={{ mb: 1 }}>추천</Typography>
-                <Stack direction="row" spacing={1}>
+                <Stack direction="row" spacing={1} sx={{ flexWrap: 'wrap', rowGap: 1, columnGap: 1 }}>
                   {raid.추천 && raid.추천.length > 0 ? (
                     raid.추천.map(hero => (
-                      <Card key={hero.name} elevation={2} sx={{ width: 56, height: 70, display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px solid #FFD600', bgcolor: '#181A20' }}>
+                      <Card key={hero.name} elevation={2} sx={{ width: { xs: 48, sm: 56 }, height: { xs: 60, sm: 70 }, display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px solid #FFD600', bgcolor: '#181A20' }}>
                         <CardMedia
                           component="img"
-                          image={`${import.meta.env.BASE_URL}heroes/${getGradeFromList(hero.name, heroList)}/${hero.name}.png`}
+                          image={`${import.meta.env.BASE_URL}heroes/${getGradeFromList(hero.name, heroList)}/${fileSafe(hero.name)}.png`}
                           alt={hero.name}
-                          sx={{ width: 52, height: 66, objectFit: 'cover', borderRadius: 1.5 }}
+                          sx={{ width: { xs: 44, sm: 52 }, height: { xs: 56, sm: 66 }, objectFit: 'cover', borderRadius: 1.5 }}
                           onError={e => { e.target.onerror = null; e.target.src = `${import.meta.env.BASE_URL}heroes/placeholder.png`; }}
                         />
                       </Card>
@@ -93,17 +95,17 @@ export default function RaidTab() {
               {/* 우측: 택1 (여러 묶음 그룹을 가질 수 있음) */}
               <Box>
                 <Typography fontWeight={700} color="primary.light" sx={{ mb: 1 }}>택1</Typography>
-                <Stack direction="row" spacing={2}>
+                <Stack direction="row" spacing={2} sx={{ flexWrap: 'wrap', rowGap: 1, columnGap: 2 }}>
                   {raid.택1 && raid.택1.length > 0 ? (
                     raid.택1.map((group, idx) => (
-                      <Stack key={idx} direction="row" spacing={1}>
+                      <Stack key={idx} direction="row" spacing={1} sx={{ flexWrap: 'wrap', rowGap: 1, columnGap: 1 }}>
                         {group.map(hero => (
-                          <Card key={hero.name} elevation={2} sx={{ width: 56, height: 70, display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px solid #3B82F6', bgcolor: '#181A20' }}>
+                          <Card key={hero.name} elevation={2} sx={{ width: { xs: 48, sm: 56 }, height: { xs: 60, sm: 70 }, display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px solid #3B82F6', bgcolor: '#181A20' }}>
                             <CardMedia
                               component="img"
-                              image={`${import.meta.env.BASE_URL}heroes/${getGradeFromList(hero.name, heroList)}/${hero.name}.png`}
+                              image={`${import.meta.env.BASE_URL}heroes/${getGradeFromList(hero.name, heroList)}/${fileSafe(hero.name)}.png`}
                               alt={hero.name}
-                              sx={{ width: 52, height: 66, objectFit: 'cover', borderRadius: 1.5 }}
+                              sx={{ width: { xs: 44, sm: 52 }, height: { xs: 56, sm: 66 }, objectFit: 'cover', borderRadius: 1.5 }}
                               onError={e => { e.target.onerror = null; e.target.src = `${import.meta.env.BASE_URL}heroes/placeholder.png`; }}
                             />
                           </Card>
