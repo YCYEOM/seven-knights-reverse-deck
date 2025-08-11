@@ -8,6 +8,8 @@ import { fetchHeroList, getGradeFromList } from "../heroList";
 //   title: '예시 보스',
 //   추천: [ { name: '루리' }, { name: '레이첼' } ],
 //   택1: [ [ { name: '세인' } ], [ { name: '쥬피' } ] ], // 여러 묶음 중 택1
+//   스킬추천: [ '스킬 순서 예시1', '스킬 순서 예시2' ],
+//   장비셋팅: [ '장비 셋팅 예시1', '장비 셋팅 예시2' ], // 스킬추천과 추천 사이에 표기됨 (옵션)
 // }
 const allOutWarData = [
   {
@@ -65,6 +67,20 @@ const allOutWarData = [
     ],
   },
   {
+    title: '방덱3',
+    추천: [ { name: '카르마' }, { name: '루디' }, { name: '플라튼' }, { name: '엘리스' }, { name: '리나' } ],
+    스킬추천: [
+        '추천1 루디2스 > 플라튼2스 > 카르마2스'
+    ],
+    장비셋팅: [
+      '루디 <조율자> | 무기 생/방 | 방어 막/받/효저',
+      '카르마 <조율자> | 무기 치확/치확 | 방어 막/받/효저',
+      '플라튼 <조율자> | 무기 생/방 | 방어 막/받/효저',
+      '엘리스 <수문장> | 무기 생 | 방어 막/받/효저',
+      '리나 <수문장> | 무기 생 | 방어 막/받/효저',
+    ],
+  },
+  {
     title: '즉사덱',
     추천: [ { name: '크리스' }, { name: '녹스' }, { name: '카린' } ],
     // 추천 하위에서 에반/룩은 택1로 선택하도록 별도 그룹 제공
@@ -97,6 +113,41 @@ export default function AllOutWarTab() {
             <Typography variant="h6" fontWeight={800} color="primary.light" sx={{ mb: 2 }}>
               {section.title}
             </Typography>
+
+            {/* 상단: 스킬 추천 및 장비 셋팅 */}
+            {(section.스킬추천 && section.스킬추천.length > 0) || (section.장비셋팅 && section.장비셋팅.length > 0) ? (
+              <>
+                {section.스킬추천 && section.스킬추천.length > 0 && (
+                  <Box>
+                    <Typography fontWeight={700} color="#9CA3AF" sx={{ mb: 1 }}>스킬 순서</Typography>
+                    <Stack spacing={0.75} sx={{ mb: section.장비셋팅 && section.장비셋팅.length > 0 ? 1.5 : 0 }}>
+                      {section.스킬추천.map((line, idx) => (
+                        <Stack key={idx} direction="row" spacing={1} alignItems="center">
+                          <Box sx={{ width: 20, height: 20, borderRadius: '50%', bgcolor: '#3B82F6', color: '#FFFFFF', fontSize: 12, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            {idx + 1}
+                          </Box>
+                          <Typography color="#E5E7EB" variant="body2">{line}</Typography>
+                        </Stack>
+                      ))}
+                    </Stack>
+                  </Box>
+                )}
+                {section.장비셋팅 && section.장비셋팅.length > 0 && (
+                  <Box>
+                    <Typography fontWeight={700} color="#9CA3AF" sx={{ mb: 1 }}>장비 셋팅</Typography>
+                    <Stack spacing={1}>
+                      {section.장비셋팅.map((line, idx) => (
+                        <Box key={idx} sx={{ p: 1, px: 1.5, bgcolor: '#1B1D2A', border: '1px solid #2E3148', borderRadius: 1.5, display: 'flex', alignItems: 'center' }}>
+                          <Box sx={{ width: 6, alignSelf: 'stretch', bgcolor: '#10B981', borderRadius: 1, mr: 1.25 }} />
+                          <Typography color="#E5E7EB" variant="body2">{line}</Typography>
+                        </Box>
+                      ))}
+                    </Stack>
+                  </Box>
+                )}
+                <Divider sx={{ my: 2, borderColor: '#2E3148' }} />
+              </>
+            ) : null}
 
             <Stack direction="row" spacing={4} alignItems="flex-start">
               {/* 좌측: 추천 */}
@@ -167,20 +218,6 @@ export default function AllOutWarTab() {
                 </Box>
               )}
             </Stack>
-
-            {section.스킬추천 && section.스킬추천.length > 0 && (
-              <>
-                <Divider sx={{ my: 2, borderColor: '#2E3148' }} />
-                <Box>
-                  <Typography fontWeight={700} color="#9CA3AF" sx={{ mb: 1 }}>스킬 순서</Typography>
-                  <Stack spacing={0.5}>
-                    {section.스킬추천.map((line, idx) => (
-                      <Typography key={idx} color="#E5E7EB" variant="body2">{line}</Typography>
-                    ))}
-                  </Stack>
-                </Box>
-              </>
-            )}
           </Paper>
         ))}
       </Box>
