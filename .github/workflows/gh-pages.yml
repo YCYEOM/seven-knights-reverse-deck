@@ -47,6 +47,16 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: List dist contents (diagnostic)
+        run: |
+          echo "VITE_BASE=$VITE_BASE"
+          echo "--- DIST TREE ---"
+          ls -l dist || true
+          echo "--- DIST ROOT FILES ---"
+          ls -l dist | sed -n '1,200p' || true
+          echo "--- Find equipmentData.json ---"
+          find dist -maxdepth 2 -iname 'equipmentData.json' -print || echo "equipmentData.json NOT FOUND in dist"
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
