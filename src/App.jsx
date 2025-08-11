@@ -60,10 +60,10 @@ export default function App() {
                         allowScrollButtonsMobile
                         sx={{ minHeight: 40, '& .MuiTabs-flexContainer': { flexWrap: 'nowrap' }, maxWidth: '100%' }}
                     >
-                        <Tab label="길드" sx={{ fontWeight: 900, fontSize: { xs: 13, sm: 18 }, minWidth: { xs: 68, sm: 120 }, p: { xs: 0.25, sm: 1 } }} />
-                        <Tab label="파밍" sx={{ fontWeight: 900, fontSize: { xs: 13, sm: 18 }, minWidth: { xs: 68, sm: 120 }, p: { xs: 0.25, sm: 1 } }} />
-                        <Tab label="PVP" sx={{ fontWeight: 900, fontSize: { xs: 13, sm: 18 }, minWidth: { xs: 68, sm: 120 }, p: { xs: 0.25, sm: 1 } }} />
-                        <Tab label="장비" sx={{ fontWeight: 900, fontSize: { xs: 13, sm: 18 }, minWidth: { xs: 68, sm: 120 }, p: { xs: 0.25, sm: 1 } }} />
+                        <Tab label="길드" sx={{ fontWeight: 900, fontSize: { xs: 15, sm: 18 }, minWidth: { xs: 68, sm: 120 }, p: { xs: 0.25, sm: 1 } }} />
+                        <Tab label="파밍" sx={{ fontWeight: 900, fontSize: { xs: 15, sm: 18 }, minWidth: { xs: 68, sm: 120 }, p: { xs: 0.25, sm: 1 } }} />
+                        <Tab label="PVP" sx={{ fontWeight: 900, fontSize: { xs: 15, sm: 18 }, minWidth: { xs: 68, sm: 120 }, p: { xs: 0.25, sm: 1 } }} />
+                        <Tab label="장비" sx={{ fontWeight: 900, fontSize: { xs: 15, sm: 18 }, minWidth: { xs: 68, sm: 120 }, p: { xs: 0.25, sm: 1 } }} />
                     </Tabs>
                 </Toolbar>
                 {/* 하위 소분류 탭 */}
