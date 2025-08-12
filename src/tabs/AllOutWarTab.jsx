@@ -17,10 +17,6 @@ const allOutWarData = [
   {
     title: '파이공덱',
     추천: [ { name: '파이' }, { name: '태오' }, { name: '델론즈' }, { name: '아일린' }, { name: '콜트' } ],
-    스킬추천: [
-      '추천1 파이1스 > 콜트1스 > 콜트2스',
-      '추천2 파이1스 > 태오2스 > 콜트2스 (방덱저격)'
-    ],
     장비셋팅: [
       '파이 <조율자> | 무기 생/방 | 방어 막/받/효저',
       '태오 <조율자> | 무기 치확/치확 | 방어 막/받/효저',
@@ -28,13 +24,17 @@ const allOutWarData = [
       '아일린 <수문장> | 무기 생 | 방어 막/받/효저',
       '콜트 <주술사> | 무기 공/방어 공 [공덱상대], <복수자> | 무기 효공/방어 공 [방덱상대]',
     ],
+    스킬추천: [
+      '파이1스 > 콜트1스 > 콜트2스',
+      '파이1스 > 태오2스 > 콜트2스 (방덱저격)'
+    ],
   },
   {
     title: '태오공덱',
     추천: [ { name: '태오' }, { name: '델론즈' }, { name: '아일린' }, { name: '에이스' } ],
     택1: [ [ { name: '스파이크' }, { name: '유신' } ] ],
     스킬추천: [
-      '추천 아일린2스 > 태오2스> 태오1스'
+      '아일린2스 > 태오2스> 태오1스'
     ],
   },
   {
@@ -42,9 +42,9 @@ const allOutWarData = [
     추천: [ { name: '멜키르' }, { name: '바네사' }, { name: '린' }, { name: '연희' } ],
     택1: [ [ { name: '유신' }, { name: '쥬리' } ] ],
     스킬추천: [
-      '추천1 린2스 > 멜키르2스 > 연희2스 (방덱저격)',
-      '추천2 린2스 > 멜키르1스 > 연희2스',
-      '추천3 린2스 > 쥬리2스 > 연희2스'
+      '린2스 > 멜키르2스 > 연희2스 (방덱저격)',
+      '린2스 > 멜키르1스 > 연희2스',
+      '린2스 > 쥬리2스 > 연희2스'
     ],
     장비셋팅: [
       '멜키르 <조율자> | 무기 생/방 | 방어 막/받/효저',
@@ -63,7 +63,7 @@ const allOutWarData = [
       [ { name: '로지' }, { name: '린' }, { name: '유신' }, { name: '바네사' } ],
     ],
     스킬추천: [
-      '추천1 니아2스 > 멜키르2스 > 연희2스 or 린2스'
+      '니아2스 > 멜키르2스 > 연희2스 or 린2스'
     ],
   },
   {
@@ -71,7 +71,7 @@ const allOutWarData = [
     추천: [ { name: '카르마' }, { name: '루디' }, { name: '엘리스' }, { name: '제이브' } ],
     택1: [ [ { name: '헬레니아' }, { name: '로지' } ] ],
     스킬추천: [
-      '추천1 루디2스 > 헬레1스 > 카르마2스'
+      '루디2스 > 헬레1스 > 카르마2스'
     ],
   },
   {
@@ -79,15 +79,15 @@ const allOutWarData = [
     추천: [ { name: '제이브' }, { name: '루디' }, { name: '엘리스' }, { name: '룩' } ],
     택1: [ [ { name: '로지' }, { name: '스파이크' }, { name: '챈슬러' } ] ],
     스킬추천: [
-      '추천1 루디2스 > 룩2스 > 제이브1스',
-      '추천2 루디2스 > 챈슬러2스 > 제이브1스'
+      '루디2스 > 룩2스 > 제이브1스',
+      '루디2스 > 챈슬러2스 > 제이브1스'
     ],
   },
   {
     title: '방덱3',
     추천: [ { name: '카르마' }, { name: '루디' }, { name: '플라튼' }, { name: '엘리스' }, { name: '리나' } ],
     스킬추천: [
-        '추천1 루디2스 > 플라튼2스 > 카르마2스'
+        '루디2스 > 플라튼2스 > 카르마2스'
     ],
     장비셋팅: [
       '루디 <조율자> | 무기 생/방 | 방어 막/받/효저',
@@ -107,10 +107,10 @@ const allOutWarData = [
       [ { name: '엘리스' }, { name: '아일린' }, { name: '로지' } ],
     ],
     스킬추천: [
-      '추천1 녹스1스 > 에반 or 룩 2스 > 크리스2스',
-      '추천2 녹스1스 > 크리스2스 > 녹스2스',
-      '추천3 녹스1스 > 헬레1스 > 크리스2스',
-      '추천4 에반2스 > 헬레1스 > 크리스2스'
+      '녹스1스 > 에반 or 룩 2스 > 크리스2스',
+      '녹스1스 > 크리스2스 > 녹스2스',
+      '녹스1스 > 헬레1스 > 크리스2스',
+      '에반2스 > 헬레1스 > 크리스2스'
     ],
   },
 ];
@@ -131,25 +131,6 @@ export default function AllOutWarTab() {
               {section.title}
             </Typography>
 
-            {/* 상단: 스킬 추천만 표시 (장비 셋팅은 별도 탭으로 이동) */}
-            {section.스킬추천 && section.스킬추천.length > 0 ? (
-              <>
-                <Box>
-                  <Typography fontWeight={700} color="#9CA3AF" sx={{ mb: 1 }}>스킬 순서</Typography>
-                  <Stack spacing={0.75}>
-                    {section.스킬추천.map((line, idx) => (
-                      <Stack key={idx} direction="row" spacing={1} alignItems="center">
-                        <Box sx={{ width: 20, height: 20, borderRadius: '50%', bgcolor: '#3B82F6', color: '#FFFFFF', fontSize: 12, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          {idx + 1}
-                        </Box>
-                        <Typography color="#E5E7EB" variant="body2">{line}</Typography>
-                      </Stack>
-                    ))}
-                  </Stack>
-                </Box>
-                <Divider sx={{ my: 2, borderColor: '#2E3148' }} />
-              </>
-            ) : null}
 
             <Stack direction="row" spacing={4} alignItems="flex-start" sx={{ flexWrap: 'wrap', rowGap: 2, columnGap: 3 }}>
               {/* 좌측: 추천 */}
@@ -220,6 +201,26 @@ export default function AllOutWarTab() {
                 </Box>
               )}
             </Stack>
+
+            {/* 하단: 스킬 추천 (추천 이후로 위치 변경) */}
+            {section.스킬추천 && section.스킬추천.length > 0 ? (
+              <>
+                <Divider sx={{ my: 2, borderColor: '#2E3148' }} />
+                <Box>
+                  <Typography fontWeight={700} color="#9CA3AF" sx={{ mb: 1 }}>스킬 순서</Typography>
+                  <Stack spacing={0.75}>
+                    {section.스킬추천.map((line, idx) => (
+                      <Stack key={idx} direction="row" spacing={1} alignItems="center">
+                        <Box sx={{ width: 20, height: 20, borderRadius: '50%', bgcolor: '#3B82F6', color: '#FFFFFF', fontSize: 12, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          {idx + 1}
+                        </Box>
+                        <Typography color="#E5E7EB" variant="body2">{line}</Typography>
+                      </Stack>
+                    ))}
+                  </Stack>
+                </Box>
+              </>
+            ) : null}
           </Paper>
         ))}
       </Box>
