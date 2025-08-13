@@ -117,15 +117,16 @@
   },
   {
     "id": 8,
-    "type": "공덱",
-    "combination": "콜트 플라튼 + α",
+    "type": "공방덱",
+    "combination": "콜트 플라튼 카린",
     "condition": "",
     "heroes": [
       {"name": "콜트", "grade": "legendary"},
-      {"name": "플라튼", "grade": "legendary"}
+      {"name": "플라튼", "grade": "legendary"},
+      {"name": "카린", "grade": "rare"}
     ],
     "counters": [
-      { "enemy": "상대법 업데이트 준비중", "recommend": "" }
+      { "enemy": "파이 콜트 에이스", "recommend": "폭탄 달려야 확률 반반" }
     ]
   }
 ]
