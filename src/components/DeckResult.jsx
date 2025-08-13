@@ -20,16 +20,85 @@ export default function DeckResult({ deck }) {
         <Box>
           <Typography fontWeight={700} color="text.secondary" mb={1}>상대 조합별 전략</Typography>
           <List dense>
-            {deck.counters.map((c, i) => (
-              <ListItem key={i}>
+            {(deck.counters || []).map((c, i) => (
+              <ListItem key={i} alignItems="flex-start" sx={{ flexDirection: 'column', alignItems: 'stretch' }}>
                 <ListItemText
                   primary={<span style={{ fontWeight: 600 }}>{c.enemy}</span>}
                   secondary={c.recommend && <span style={{ color: '#3B82F6', fontWeight: 700 }}>→ {c.recommend}</span>}
                 />
+                {/* per-counter skill orders (up to 3 sets) */}
+                {(() => {
+                  const sets = [c.skillOrder, c.skillOrder2, c.skillOrder3].filter(
+                    (arr) => Array.isArray(arr) && arr.length > 0
+                  );
+                  if (sets.length === 0) return null;
+                  return (
+                    <Box sx={{ mt: 0.5, ml: 2, pb: 1 }}>
+                      <Stack spacing={1}>
+                        {sets.map((lines, sIdx) => (
+                          <Box key={sIdx}>
+                            {sets.length > 1 && (
+                              <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 800, display: 'block', mb: 0.25 }}>
+                                세트 {sIdx + 1}
+                              </Typography>
+                            )}
+                            <Stack spacing={0.25}>
+                              {lines.map((line, idx) => (
+                                <Typography key={idx} variant="caption" color="text.secondary">{idx + 1}. {line}</Typography>
+                              ))}
+                            </Stack>
+                          </Box>
+                        ))}
+                      </Stack>
+                    </Box>
+                  );
+                })()}
               </ListItem>
             ))}
           </List>
         </Box>
+
+        {/* 스킬 순서: 최대 3개 세트 지원 (skillOrder, skillOrder2, skillOrder3) */}
+        {(() => {
+          const skillSets = [deck.skillOrder, deck.skillOrder2, deck.skillOrder3].filter(
+            (arr) => Array.isArray(arr) && arr.length > 0
+          );
+          if (skillSets.length === 0) return null;
+          return (
+            <Box sx={{ mt: 2 }}>
+              <Typography fontWeight={800} color="text.secondary" mb={1}>스킬 순서</Typography>
+              <Stack spacing={1.5}>
+                {skillSets.map((lines, sIdx) => (
+                  <Box key={sIdx}>
+                    {skillSets.length > 1 && (
+                      <Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: 800, mb: 0.5 }}>
+                        세트 {sIdx + 1}
+                      </Typography>
+                    )}
+                    <Stack spacing={0.5}>
+                      {lines.map((line, idx) => (
+                        <Typography key={idx} variant="body2" color="text.secondary">{idx + 1}. {line}</Typography>
+                      ))}
+                    </Stack>
+                  </Box>
+                ))}
+              </Stack>
+            </Box>
+          );
+        })()}
+
+        {deck.avoid && deck.avoid.length > 0 && (
+          <Box sx={{ mt: 2 }}>
+            <Typography fontWeight={700} color="error.light" mb={1}>피해야 할 조합</Typography>
+            <List dense>
+              {deck.avoid.map((name, i) => (
+                <ListItem key={i}>
+                  <ListItemText primary={<span style={{ fontWeight: 700, color: '#ef4444' }}>{name}</span>} />
+                </ListItem>
+              ))}
+            </List>
+          </Box>
+        )}
       </CardContent>
     </Card>
   );

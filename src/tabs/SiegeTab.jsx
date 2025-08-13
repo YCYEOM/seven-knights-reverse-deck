@@ -34,28 +34,48 @@ const siegeData = [
     skillTip: '마지막쯤 남아있는 딜러로 딜 욱여넣기'
   },
   { day: '목', title: '죽음의 성',     필수: [ { name: '진' }, { name: '리' }, { name: '타카' } ], 추천: [ { name: '타카' }, { name: '리나' }, { name: '파이' }, { name: '레이첼' }, { name: '진' }, { name: '에이스' } ], 추천딜러: [ { name: '파이' }, { name: '레이첼' } ], 택1: { 토템2: [ { name: '리나' }, { name: '에이스' }, { name: '레이첼' } ] },
-    skillOrder: [
-      '업데이트 준비중'
-    ],
-    skillTip: '업데이트 준비중'
+    skillOrderGrouped: {
+      '파이덱': [
+        '진1 진2 리나2 에이스2 타카1',
+        '타카2 리나1 파이2 파이1 진2',
+        '에이스2 타카1 타카2 진1 리나1',
+        '리나2 진2 타카2 타카1 진1',
+      ],
+      '레이첼덱': [
+        '진1 진2 리나2 에이스2 타카1',
+        '타카2 리나1 레이첼1 레이첼2 진2',
+        '타카1 타카2 진1 리나2 레이첼2',
+        '리나1 레이첼1 타카2 타카1 진2',
+      ]
+    },
+    skillTip: '파이덱(고득점 가능)은 안정성이 약간 떨어지고, 레이첼덱이 상대에 따라 더 안정적'
   },
   { day: '금', title: '고대용의 성',   필수: [ { name: '유이' }, { name: '에반' }, { name: '타카' } ], 추천: [ { name: '타카' }, { name: '리나' }, { name: '레이첼' }, { name: '지크' }, { name: '유이' } ], 택1: { 서브딜러: [ { name: '비담' }, { name: '풍연' } ], 토템: [ { name: '리나' }, { name: '에이스' }, { name: '레이첼' }, { name: '바네사' } ] },
     skillOrder: [
-      '업데이트 준비중'
+      '타카1 타카2 레이첼2 유이1 리나2',
+      '지크1 레이첼1 타카1 타카2 지크1',
+      '레이첼2 유이1 리나2 타카1 타카2',
+      '리나1 지크1 레이첼1 레이첼2 타카2',
     ],
-    skillTip: '업데이트 준비중'
+    skillTip: '타카2스가 상대 체력30프로 이하일때 딜이 더들어감'
   },
   { day: '토', title: '혹한의 성',     필수: [ { name: '풍연' }, { name: '타카' } ], 추천: [ { name: '타카' }, { name: '리나' }, { name: '레이첼' }, { name: '바네사' }, { name: '풍연' } ], 택1: { 서브딜러: [ { name: '비담' }, { name: '레이첼' } ], 토템: [ { name: '리나' }, { name: '에이스' } ], 디버프해제: [ { name: '노호' }, { name: '조커' }, { name: '소이' }, { name: '바네사', note: '2초월 이상' } ] },
     skillOrder: [
-      '업데이트 준비중'
+      '풍연1 풍연2 레이첼2 바네사1 리나2',
+      '타카1 타카2 풍연1 풍연2 레이첼1',
+      '바네사1 레이첼2 타카1 타카2 리나2',
+      '풍연2 바네사1 레이첼2 타카2 타카1',
     ],
-    skillTip: '업데이트 준비중'
+    skillTip: '분쇄 이후 디버프해제 필요, 타카1스만으로 상대체력 30퍼 이하를 못만들경우 바네사2스 이후 타카2스'
   },
   { day: '일', title: '지옥의 성',     필수: [ { name: '레오' }, { name: '아수라' }, { name: '세인' }, { name: '파스칼' } ], 추천: [ { name: '파스칼' }, { name: '레오' }, { name: '에스파다' }, { name: '바네사' }, { name: '아수라' } ], 택1: { 토템: [ { name: '에이스' }, { name: '레이첼' }, { name: '리나' } ] },
     skillOrder: [
-      '업데이트 준비중'
+      '바네사2 바네사1 아수라1 에스파다1 파스칼2',
+      '파스칼1 파스칼2 아수라2 파스칼1 파스칼2',
+      '에스파다1 아수라1 파스칼1 아수라2 파스칼2',
+      '파스칼1 파스칼2 에스파다2 파스칼1 파스칼2',
     ],
-    skillTip: '업데이트 준비중'
+    skillTip: '48턴쯤 파스칼2스킬을 사용시 1스킬 쿨이 12초쯤 와야 스킬쿨이 딱 맞는데 가끔 스킬쿨이 씹힘 (씹히면 재시도)'
   },
 ];
 
@@ -175,16 +195,31 @@ export default function SiegeTab() {
               </Stack>
             </Stack>
 
-            {/* 스킬 순서 표시 (있을 경우) */}
-            {fort.skillOrder && fort.skillOrder.length > 0 && (
+            {/* 스킬 순서 표시 (단일/그룹 모두 지원) */}
+            {(fort.skillOrderGrouped || (fort.skillOrder && fort.skillOrder.length > 0)) && (
               <Box sx={{ mt: 2 }}>
                 <Divider sx={{ borderColor: '#2f3046', mb: 1 }} />
                 <Typography variant="subtitle2" color="secondary.light" sx={{ mb: 1, fontWeight: 800 }}>스킬 순서</Typography>
-                <Stack spacing={0.5}>
-                  {fort.skillOrder.map((line, idx) => (
-                    <Typography key={idx} variant="body2" color="text.secondary">{idx + 1}. {line}</Typography>
-                  ))}
-                </Stack>
+                {fort.skillOrderGrouped ? (
+                  <Stack spacing={1.5}>
+                    {Object.entries(fort.skillOrderGrouped).map(([variant, lines]) => (
+                      <Box key={variant}>
+                        <Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: 800, mb: 0.5 }}>{variant}</Typography>
+                        <Stack spacing={0.5}>
+                          {lines.map((line, idx) => (
+                            <Typography key={idx} variant="body2" color="text.secondary">{idx + 1}. {line}</Typography>
+                          ))}
+                        </Stack>
+                      </Box>
+                    ))}
+                  </Stack>
+                ) : (
+                  <Stack spacing={0.5}>
+                    {fort.skillOrder.map((line, idx) => (
+                      <Typography key={idx} variant="body2" color="text.secondary">{idx + 1}. {line}</Typography>
+                    ))}
+                  </Stack>
+                )}
               </Box>
             )}
 

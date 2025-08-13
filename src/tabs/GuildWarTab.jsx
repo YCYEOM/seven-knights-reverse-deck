@@ -8,9 +8,21 @@ export default function GuildWarTab() {
   const [selected, setSelected] = useState(null);
 
   useEffect(() => {
-    fetch(import.meta.env.BASE_URL + 'deckdata.json')
-      .then((r) => r.json())
-      .then(setDecks);
+    const ts = import.meta.env.DEV ? `?t=${Date.now()}` : '';
+    const base = import.meta.env.BASE_URL || '/';
+    const url = `${base}deckdata.json${ts}`; // single source in public/, copied to dist on build
+
+    (async () => {
+      try {
+        const res = await fetch(url, { cache: 'no-store' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const json = await res.json();
+        setDecks(json);
+        if (import.meta.env.DEV) console.info(`[GuildWar] loaded deckdata from: ${url}`);
+      } catch (e) {
+        console.error('[GuildWar] failed to load deckdata.json from public path:', e);
+      }
+    })();
   }, []);
 
   return (

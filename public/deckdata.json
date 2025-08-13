@@ -13,6 +13,11 @@
       { "enemy": "콜트 플라튼 카린", "recommend": "스펙차이" },
       { "enemy": "녹스 루시 크리스", "recommend": "즉사 확률 반반" },
       { "enemy": "파이 콜트 에이스", "recommend": "폭탄 달려야 확률 반반" }
+    ],
+    "avoid": [
+      "연희덱",
+      "린덱",
+      "태오덱"
     ]
   },
   {
@@ -129,6 +134,22 @@
     "counters": [
       { "enemy": "레오 크리스 녹스", "recommend": "" },
       { "enemy": "레오 + 딜러 아무거나(상대에게 안 녹을 정도)", "recommend": "" }
+    ]
+  },
+  {
+    "id": 9,
+    "type": "공덱",
+    "combination": "콜트 델론즈 아일린",
+    "condition": "",
+    "heroes": [
+      {"name": "콜트", "grade": "legendary"},
+      {"name": "델론즈", "grade": "legendary"},
+      {"name": "아일린", "grade": "legendary"}
+    ],
+    "counters": [
+      { "enemy": "카린 풍연 리", "recommend": "", "skillOrder": [
+        "풍연1 풍연2 스킬지정x"
+      ] }
     ]
   }
 ]

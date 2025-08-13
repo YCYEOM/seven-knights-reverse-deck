@@ -128,5 +128,21 @@
     "counters": [
       { "enemy": "파이 콜트 에이스", "recommend": "폭탄 달려야 확률 반반" }
     ]
+  },
+  {
+    "id": 9,
+    "type": "공덱",
+    "combination": "콜트 델론즈 아일린",
+    "condition": "",
+    "heroes": [
+      {"name": "콜트", "grade": "legendary"},
+      {"name": "델론즈", "grade": "legendary"},
+      {"name": "아일린", "grade": "legendary"}
+    ],
+    "counters": [
+      { "enemy": "카린 풍연 리", "recommend": "", "skillOrder": [
+        "풍연1 풍연2 스킬지정x"
+      ] }
+    ]
   }
 ]
